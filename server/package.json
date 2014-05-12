@@ -1,5 +1,5 @@
 {
-	"name": "mytest",
+	"name": "mytest-server",
 	"version": "0.0.0",
 	"dependencies": {
 		"express": "~4.0.0",
@@ -13,10 +13,25 @@
 		"compression": "~1.0.1",
 		"lodash": "~2.4.1",
 		"ejs": "~0.8.4",
-		"node-cache": "1.0.0"
+		"node-cache": "1.0.0",
+		"connect-mongo" : "*"
 	},
 	"devDependencies": {
-		"connect-livereload": "~0.3.0"
+		"connect-livereload": "~0.3.0",
+		"grunt": "~0.4.1",
+		"grunt-contrib-less": "~0.11.0",
+		"grunt-contrib-clean": "^0.4.1",
+		"grunt-contrib-copy": "^0.4.1",
+		"grunt-contrib-jshint": "^0.4.3",
+		"grunt-contrib-concat": "^0.3.0",
+		"grunt-contrib-watch": "^0.4.4",
+		"grunt-contrib-uglify": "^0.2.7",
+		"grunt-ngmin": "0.0.2",
+		"grunt-html2js": "^0.1.9",
+		"grunt-contrib-coffee": "^0.7.0",
+		"grunt-coffeelint": "~0.0.10",
+		"grunt-conventional-changelog": "^0.1.2",
+		"grunt-bump": "0.0.6"
 	},
 	"engines": {
 		"node": ">=0.10.0"

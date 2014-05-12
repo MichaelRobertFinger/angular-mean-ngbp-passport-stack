@@ -18,9 +18,11 @@ var express = require('express'),
 	errorHandler = require('errorhandler'),
 	path = require('path'),
 	http = require('http'),
+	NodeCache = require("node-cache"),
 	config = require('./lib/config/config');
 
 var app = express();
+var MongoStore = require('connect-mongo')(session);
 var env = app.get('env');
 
 if ('development' === env) {
@@ -57,10 +59,15 @@ if ('development' === app.get('env')) {
 
 require('./lib/routes')(app, config);
 
-var NodeCache = require("node-cache");
 app.cache = new NodeCache();
 
-//app.use(cookieParser());
+app.use(cookieParser());
+app.use(session({
+	store: new MongoStore({
+		url: config.db
+	}),
+	secret: config.server.cookieSecret
+}));
 
 // allow express server to be started with a callback (useful in testing)
 app.start = function (config, readyCallback) {
