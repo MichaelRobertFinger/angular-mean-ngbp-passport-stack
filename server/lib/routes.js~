@@ -1,0 +1,77 @@
+'use strict';
+
+var accountApi = require('./controllers/accountApi'),
+    index = require('./controllers'),
+    cache = require('./controllers/cache'),
+    ticketsApi = require('./controllers/ticketsApi');
+/**
+ * Application routes
+ */
+module.exports = function(app) {
+
+    app.route('/api/ad/:adId')
+        .get(ticketsApi.getAd);
+
+    app.route('/api/account/:accountId')
+        .get(accountApi.getAccount);
+
+    app.route('/api/account/:accountId/aa')
+        .put(accountApi.resetAA);
+
+    app.route('/api/account/ad/:adId')
+        .get(accountApi.getAccountByAdId);
+
+    app.route('/api/account/email/:email')
+        .get(accountApi.getAccountByEmail);
+
+    app.route('/api/notes/:accountId/systemGenerated/:isSysCreated')
+        .get(accountApi.getNotesForAccount);
+
+    app.route('/api/noteTypes')
+        .get(accountApi.getNoteTypes);
+
+    app.route('/api/tickets')
+        .get(ticketsApi.getMyTickets);
+
+    app.route('/ticketsApi/tickets/service/:id')
+        .get(ticketsApi.getTicketServiceInfo);
+
+    app.route('/ticketsApi/tickets/:id')
+        .get(ticketsApi.getTicketInfo);
+
+    app.route('/api/changelog/:id')
+        .get(ticketsApi.getChangelog);
+
+    app.route('/api/tickets/queue/:id')
+        .get(ticketsApi.getTicketsByQueue);
+
+    app.route('/api/queueCount')
+        .get(ticketsApi.getQueueCount);
+
+    app.route('/cache/getCategories')
+        .get(cache.getCategories);
+
+    app.route('/ticketsApi/approveService/:id')
+        .get(ticketsApi.approveService);
+
+    app.route('/ticketsApi/returnService/:id')
+        .get(ticketsApi.returnService);
+
+    app.route('/ticketsApi/rejectService/:id')
+        .get(ticketsApi.rejectService);
+
+    app.route('/ticketsApi/publishService/:id')
+        .get(ticketsApi.publishService);
+
+  // All undefined api routes should return a 404
+  app.route('/api/*')
+    .get(function(req, res) {
+      res.send(404);
+    });
+
+  // All other routes to use Angular routing in app/scripts/app.js
+  app.route('/partials/*')
+    .get(index.partials);
+  app.route('/*')
+    .get( index.index);
+};
