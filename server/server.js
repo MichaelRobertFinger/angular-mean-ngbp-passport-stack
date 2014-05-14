@@ -18,11 +18,18 @@ var express = require('express'),
 	errorHandler = require('errorhandler'),
 	path = require('path'),
 	http = require('http'),
-	NodeCache = require("node-cache"),
+	NodeCache = require('node-cache'),
+	UserHandler = require('./lib/handlers/UserHandler'),
+	AuthHandler = require('./lib/handlers/AuthHandler'),
+	passport = require('passport'),
+	mongoose = require('mongoose'),
+	UserDB = require('./lib/models/user'),
 	config = require('./lib/config/config');
 
 var app = express();
-var MongoStore = require('connect-mongo')(session);
+
+var google_strategy = require('passport-google-oauth').OAuth2Strategy;
+
 var env = app.get('env');
 
 if ('development' === env) {
@@ -45,29 +52,73 @@ if ('production' === env) {
 	app.use(favicon(config.server.distFolder + '/favicon.ico'));
 }
 
+//app.set('client-url','http://localhost:9000');
+//app.set('client-google-signin','/google?action=signin');
+
 app.use(express.static(path.join(config.root, 'build')));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.use(morgan('dev'));
 app.use(bodyParser());
 app.use(methodOverride());
+app.use(cookieParser());
+app.use(passport.initialize());
 
 // Error handler - has to be last
 if ('development' === app.get('env')) {
 	app.use(errorHandler());
 }
 
-require('./lib/routes')(app, config);
+mongoose.connect(config.db);
+
+var db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function callback() {
+	console.log("Connected to db");
+});
+
+passport.use(new google_strategy({
+		clientID: '665254621941-jpdrphk5p0tbnapt8nsrvo0sgi9llpeg.apps.googleusercontent.com',
+		clientSecret: 'xtiWDkT_YvQzXi096-AmeQTr',
+		callbackURL: 'http://localhost:9000/auth/google/callback'
+	},
+	function (accessToken, refreshToken, profile, done) {
+		console.log('google strategy' + accessToken);
+		console.log('google profile' + profile._json.email);
+		UserDB.findOne({email: profile._json.email}, function (err, usr) {
+			if (usr == null) {
+				usr = new UserDB({
+					'email': profile._json.email,
+					'last_name': '',
+					'first_name': ''
+				});
+				console.log('usr is:' + usr);
+			}
+			usr.token = accessToken;
+			usr.save(function (err, usr, num) {
+				if (err) {
+					console.log('error saving token' + err);
+				} else {
+					console.log('usr saved');
+				}
+			});
+			process.nextTick(function () {
+				return done(null, profile);
+			});
+		});
+	}
+));
+
+
+var handlers = {
+	user: new UserHandler(),
+	auth: new AuthHandler()
+};
+
+require('./lib/routes')(app, config, handlers);
 
 app.cache = new NodeCache();
-
-app.use(cookieParser());
-app.use(session({
-	store: new MongoStore({
-		url: config.db
-	}),
-	secret: config.server.cookieSecret
-}));
 
 // allow express server to be started with a callback (useful in testing)
 app.start = function (config, readyCallback) {
