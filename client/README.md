@@ -131,7 +131,7 @@ of the tools](tools.md) before continuing with this section.
 
 Okay, ready to go? Here it is:
 
-`ngBoilerplate` uses [Grunt](http://gruntjs.org) as its build system, so
+`myTestApp` uses [Grunt](http://gruntjs.org) as its build system, so
 [Node.js](http://nodejs.org) is required. Also, Grunt by default no longer comes
 with a command-line utility and Karma and Bower must end up in your global path
 for the build system to find it, so they must be installed independently. Once
@@ -163,7 +163,7 @@ This will read the `dependencies` (empty by default) and the `devDependencies`
 (which contains our build requirements) from `package.json` and install
 everything needed into a folder called `node_modules/`.
 
-There are many Bower packages used by `ngBoilerplate`, like Twitter Bootstrap
+There are many Bower packages used by `myTestApp`, like Twitter Bootstrap
 and Angular UI, which are listed in `bower.js`. To install them into the
 `vendor/` directory, simply run:
 
@@ -184,7 +184,7 @@ application (or we download it from a different computer), we can simply run the
 `bower install` command as above and all our dependencies will be installed for
 us. Neat!
 
-Technically, `ngBoilerplate` is now ready to go.
+Technically, `myTestApp` is now ready to go.
 
 However, prior to hacking on your application, you will want to modify the
 `package.json` file to contain your project's information. Do not remove any
@@ -240,7 +240,7 @@ $ grunt
 The best way to learn about the build system is by familiarizing yourself with
 Grunt and then reading through the heavily documented build script,
 `Gruntfile.js`. But you don't need to do that to be very productive with
-`ngBoilerplate`. What follows in this section is a quick introduction to the
+`myTestApp`. What follows in this section is a quick introduction to the
 tasks provided and should be plenty to get you started.
 
 The driver of the process is the `delta` multi-task, which watches for file
@@ -314,7 +314,7 @@ expected, open the `bin/index.html` file in your browser. Voila!
 
 ### Live Reload!
 
-`ngBoilerplate` also includes [Live Reload](http://livereload.com/), so you no
+`myTestApp` also includes [Live Reload](http://livereload.com/), so you no
 longer have to refresh your page after making changes! You need a Live Reload
 browser plugin for this:
 
@@ -324,7 +324,7 @@ browser plugin for this:
 - Internet Explorer - Surely you jest.
 
 Note that if you're using the Chrome version with `file://` URLs (as is the
-default with `ngBoilerplate`) you need to tell Live Reload to allow it. Go to
+default with `myTestApp`) you need to tell Live Reload to allow it. Go to
 `Menu -> Tools -> Extensions` and check the "Allow access to file URLs" box next
 to the Live Reload plugin.
 

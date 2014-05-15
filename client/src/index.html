@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="ngBoilerplate" ng-controller="AppController">
+<html ng-app="myTestApp" ng-controller="AppController">
 <head>
     <title ng-bind="pageTitle"></title>
 
@@ -15,55 +15,9 @@
     <!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
     <script type="text/javascript" src="<%= file %>"></script>
     <% }); %>
-
-    <!-- it's stupid to have to load it here, but this is for the +1 button -->
-    <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
-        {
-            "parsetags"
-        :
-            "explicit"
-        }
-    </script>
 </head>
 <body>
-<div class="container">
-    <div class="navbar navbar-default">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" ng-init="menuCollapsed = true"
-                    ng-click="menuCollapsed = ! menuCollapsed">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <div class="navbar-brand">
-                mytest
-            </div>
-        </div>
-        <div class="collapse navbar-collapse" collapse="menuCollapsed">
-            <ul class="nav navbar-nav">
-                <li ui-sref-active="active">
-                    <a href ui-sref="home">
-                        <i class="fa fa-home"></i>
-                        Home
-                    </a>
-                </li>
-                <li ui-sref-active="active">
-                    <a href ui-sref="about">
-                        <i class="fa fa-info-circle"></i>
-                        What is it?
-                    </a>
-                </li>
-                <li ui-sref-active="active">
-                    <a href ui-sref="login">
-                        <i class="fa fa-info-circle"></i>
-                        Login
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
+<div class="container" ui-view="navbar"></div>
 
 <div class="container" ui-view="main"></div>
 

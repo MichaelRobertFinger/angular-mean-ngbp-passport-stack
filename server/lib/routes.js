@@ -1,6 +1,9 @@
 'use strict';
 
-module.exports = function (app, config, handlers) {
+var path = require('path'),
+	auth = require('./config/auth');
+
+module.exports = function (app, config) {
 	// redirect to a qrlert (eventually api call) with if/else logic in res to determine a hard redirect
 	app.route('/q/:id').get(function (req, res, next) {
 		var args = { qrlertId: req.params.id };
@@ -8,22 +11,20 @@ module.exports = function (app, config, handlers) {
 		res.redirect('http://google.com');
 	});
 
-	app.get('/auth/google',handlers.auth.googleSignIn);
-	app.get('/auth/google/callback',handlers.auth.googleSignInCallback);
-	app.get('/auth/facebook',handlers.auth.facebookSignIn);
-	app.get('/auth/facebook/callback',handlers.auth.facebookSignInCallback);
-	app.get('/auth/local',handlers.auth.localSignIn);
-	app.get('/auth/local/callback',handlers.auth.localSignInCallback);
-	app.get('/user',handlers.user.getUsers);
-	app.get('/user/:id',handlers.user.getUser);
-	app.put('/user/:id',handlers.user.updateUser);
-	app.get('/user/:first/:last/:email',handlers.user.createUser);
+	// User Routes
+	var users = require('./controllers/users');
+	app.post('/auth/users', users.create);
+	app.get('/auth/users/:userId', users.show);
 
-	// All undefined api routes should return a 404
-	app.route('/api/*')
-		.get(function (req, res) {
-			res.send(404);
-		});
+	// Check if username is available
+	// todo: probably should be a query on users
+	app.get('/auth/check_username/:username', users.exists);
+
+	// Session Routes
+	var session = require('./controllers/session');
+	app.get('/auth/session', auth.ensureAuthenticated, session.session);
+	app.post('/auth/session', session.login);
+	app.del('/auth/session', session.logout);
 
 	console.log("Successfully set up routes");
 };

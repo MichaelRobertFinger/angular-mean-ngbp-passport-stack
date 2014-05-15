@@ -7,6 +7,7 @@ module.exports = {
 	port: process.env.PORT || 9000,
 	root: rootPath,
 	server: {
+		distFolder: path.resolve(rootPath, 'build'),
 		staticUrl: '/static', // The base url from which we serve static files (such as js, css and images)
 		cookieSecret: 'mytest-app' // The secret for encrypting the cookie
 	},

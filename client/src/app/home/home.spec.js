@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Tests sit right alongside the file they are testing, which is more intuitive
  * and portable than separating `src` and `test` directories. Additionally, the
@@ -5,7 +7,7 @@
  * automatically.
  */
 describe( 'home section', function() {
-  beforeEach( module( 'ngBoilerplate.home' ) );
+  beforeEach( module( 'myTestApp.home' ) );
 
   it( 'should have a dummy test', inject( function() {
     expect( true ).toBeTruthy();
