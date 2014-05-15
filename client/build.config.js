@@ -38,8 +38,7 @@ module.exports = {
    */
   test_files: {
     js: [
-      'vendor/angular-mocks/angular-mocks.js',
-	    'vendor/angular-scenario/angular-scenario.js'
+      'vendor/angular-mocks/angular-mocks.js'
     ]
   },
 
@@ -76,6 +75,7 @@ module.exports = {
       'vendor/angular-ui-utils/modules/route/route.js'
     ],
     css: [
+	    'assets/font-awesome.css'
     ],
     assets: [
     ]

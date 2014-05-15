@@ -13,8 +13,7 @@ angular.module('myTestApp.navbar', ['ui.router'])
 			data: { pageTitle: 'Home' }
 		});
 	})
-	.controller('NavbarController', function ($scope, $location) {
-/*
+	.controller('NavbarController', function ($scope, Auth, $location) {
 		$scope.logout = function () {
 			Auth.logout(function (err) {
 				if (!err) {
@@ -22,5 +21,4 @@ angular.module('myTestApp.navbar', ['ui.router'])
 				}
 			});
 		};
-		*/
-});
+	});

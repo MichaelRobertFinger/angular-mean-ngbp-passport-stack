@@ -7,21 +7,30 @@ describe('Controller: NavbarController', function () {
 
 	var NavbarController,
 		scope,
+		Auth,
 		$httpBackend;
 
 	// Initialize the controller and a mock scope
-	beforeEach(inject(function ($controller, $rootScope) {
+	beforeEach(inject(function ($controller, $rootScope, _$httpBackend_, _Auth_) {
+		$httpBackend = _$httpBackend_;
 		scope = $rootScope.$new();
+		Auth = _Auth_;
 		NavbarController = $controller('NavbarController', {
 			$scope: scope
 		});
 	}));
 
-	it('should have a dummy test', inject(function () {
-		$httpBackend.expectPOST('/auth/session').respond(400, {errors:{'model': {type:'Not logged in'}}});
+	it('should not log out user if an error occurs when calling logout', inject(function () {
+		// mock user
+		var user = {'email': 'test', 'password':'pass', username:'bob' };
+		//$httpBackend.expectDELETE('/auth/session').respond({});
+		spyOn(Auth, 'logout').andReturn('error');
+
+		scope.currentUser = user;
+		expect(scope.currentUser.username).toBe(user.username);
 
 		scope.logout();
-		$httpBackend.flush();
-		expect(scope.errors.model).toBe('Not logged in');
+
+		expect(scope.currentUser.username).toBe(user.username);
 	}));
 });
