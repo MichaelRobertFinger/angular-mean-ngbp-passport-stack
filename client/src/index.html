@@ -17,6 +17,13 @@
     <% }); %>
 </head>
 <body>
+<div id="loadingWidget" class="row-fluid ui-corner-all" style="padding: 0 .7em;" loading-widget>
+    <div class="loadingContent">
+        <p>
+            <img alt="Loading  Content" src="assets/ajax-loader.gif" />&nbsp;Loading
+        </p>
+    </div>
+</div>
 <div ng-include="" src="'components/navbar.tpl.html'"></div>
 
 <div class="container" ui-view="main"></div>

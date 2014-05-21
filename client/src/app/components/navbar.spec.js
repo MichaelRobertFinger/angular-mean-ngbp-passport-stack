@@ -23,7 +23,6 @@ describe('Controller: NavbarController', function () {
 	it('should not log out user if an error occurs when calling logout', inject(function () {
 		// mock user
 		var user = {'email': 'test', 'password':'pass', username:'bob' };
-		//$httpBackend.expectDELETE('/auth/session').respond({});
 		spyOn(Auth, 'logout').andReturn('error');
 
 		scope.currentUser = user;
@@ -33,4 +32,19 @@ describe('Controller: NavbarController', function () {
 
 		expect(scope.currentUser.username).toBe(user.username);
 	}));
+
+	/*
+	it('should log out user', inject(function () {
+		// mock user
+		var user = {'email': 'test', 'password':'pass', username:'bob' };
+		spyOn(Auth, 'logout');
+
+		scope.currentUser = user;
+		expect(scope.currentUser.username).toBe(user.username);
+
+		scope.logout();
+
+		expect(scope.currentUser.username).toBe(null);
+	}));
+	*/
 });
