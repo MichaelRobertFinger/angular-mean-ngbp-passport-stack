@@ -70,6 +70,7 @@ module.exports = {
 	    'vendor/angular-resource/angular-resource.js',
 	    'vendor/angular-sanitize/angular-sanitize.js',
 	    'vendor/json3/lib/json3.js',
+	    'vendor/jquery/dist/jquery.js',
       'vendor/placeholders/angular-placeholders-0.0.1-SNAPSHOT.min.js',
       'vendor/angular-ui-router/release/angular-ui-router.js',
       'vendor/angular-ui-utils/modules/route/route.js'

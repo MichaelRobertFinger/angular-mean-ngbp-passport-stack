@@ -7,6 +7,7 @@ angular.module('myTestApp', [
 	'http-auth-interceptor',
 	'ui.bootstrap',
 	'ui.router',
+	'http-error-handling',
 	'templates-app',
 	'templates-common',
 	'myTestApp.home',
@@ -113,16 +114,18 @@ angular.module('myTestApp', [
 			restrict: 'A',
 			link: function (scope, element) {
 				// hide the element initially
-				element.hide();
+				element.removeClass('show-me').addClass('hide-me');
 
 				var startRequestHandler = function () {
 					// got the request start notification, show the element
-					element.show();
+					console.log('show');
+					element.removeClass('hide-me').addClass('show-me');
 				};
 
 				var endRequestHandler = function () {
 					// got the request start notification, show the element
-					element.hide();
+					console.log('hide');
+					element.removeClass('show-me').addClass('hide-me');
 				};
 
 				requestNotificationChannel.onRequestStarted(scope, startRequestHandler);

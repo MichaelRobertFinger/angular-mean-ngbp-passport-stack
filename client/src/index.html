@@ -11,13 +11,11 @@
     <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
     <link rel="stylesheet" type="text/css" href="<%= file %>"/>
     <% }); %>
-
-    <!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
-    <script type="text/javascript" src="<%= file %>"></script>
-    <% }); %>
 </head>
 <body>
-<div id="loadingWidget" class="row-fluid ui-corner-all" style="padding: 0 .7em;" loading-widget>
+<div class="http-error-messages" http-error-messages></div>
+
+<div id="loadingWidget" class="row-fluid ui-corner-all" loading-widget>
     <div class="loadingContent">
         <p>
             <img alt="Loading  Content" src="assets/ajax-loader.gif" />&nbsp;Loading
@@ -36,5 +34,8 @@
         </div>
     </div>
 </footer>
+<!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
+<script type="text/javascript" src="<%= file %>"></script>
+<% }); %>
 </body>
 </html>

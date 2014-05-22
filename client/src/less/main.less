@@ -68,7 +68,7 @@ h2 {
  */
 
 .navbar {
-  margin-top: 20px;
+  margin-top: 0px;
   
   small {
     font-size: 60%;
@@ -111,6 +111,10 @@ h2 {
   }
 }
 
+.hide-me { display: none !important;}
+
+.show-me { display: inline-block !important; }
+
 
 /**
  * Now that all app-wide styles have been applied, we can load the styles for
@@ -120,4 +124,5 @@ h2 {
  */
 
 @import '../app/home/home.less';
+@import '../common/http-error-handling.less';
 

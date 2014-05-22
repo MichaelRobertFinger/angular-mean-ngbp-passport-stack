@@ -279,39 +279,7 @@ module.exports = function (grunt) {
 				'Gruntfile.js'
 			],
 			options: {
-				'node': true,
-				'browser': true,
-				'esnext': true,
-				'bitwise': true,
-				'curly': true,
-				'eqeqeq': true,
-				'immed': true,
-				'indent': 2,
-				'latedef': true,
-				'newcap': true,
-				'noarg': true,
-				'quotmark': 'single',
-				'regexp': true,
-				'undef': true,
-				'strict': true,
-				'trailing': false,
-				'smarttabs': true,
-				'globals': {
-					'angular': false,
-					'after': false,
-					'afterEach': false,
-					'before': false,
-					'beforeEach': false,
-					'browser': false,
-					'describe': false,
-					'expect': false,
-					'inject': false,
-					'it': false,
-					'jasmine': false,
-					'spyOn': false
-				},
-				'es5': true,
-				'expr': true
+				jshintrc: '.jshintrc'
 			},
 			globals: {}
 		},
