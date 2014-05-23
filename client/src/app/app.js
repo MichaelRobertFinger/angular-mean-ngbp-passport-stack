@@ -72,6 +72,7 @@ angular.module('myTestApp', [
 
 		// On catching 401 errors, redirect to the login page.
 		$rootScope.$on('event:auth-loginRequired', function () {
+			console.log('redirect to login');
 			$location.path('/login');
 			return false;
 		});
@@ -118,13 +119,11 @@ angular.module('myTestApp', [
 
 				var startRequestHandler = function () {
 					// got the request start notification, show the element
-					console.log('show');
 					element.removeClass('hide-me').addClass('show-me');
 				};
 
 				var endRequestHandler = function () {
 					// got the request start notification, show the element
-					console.log('hide');
 					element.removeClass('show-me').addClass('hide-me');
 				};
 
