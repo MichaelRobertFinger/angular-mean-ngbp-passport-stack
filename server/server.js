@@ -48,8 +48,6 @@ if ('production' === env) {
 	app.use(favicon(config.server.distFolder + '/favicon.ico'));
 }
 
-app.use(config.server.staticUrl, express.static(config.server.distFolder));
-
 app.use(express.static(path.join(config.root, 'build')));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
@@ -90,6 +88,10 @@ fs.readdirSync(modelsPath).forEach(function (file) {
 });
 
 var pass = require('./lib/config/passport'); // pass passport for configuration
+
+// use passport session
+app.use(passport.initialize());
+app.use(passport.session());
 
 require('./lib/routes')(app, config);
 
