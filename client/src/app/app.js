@@ -11,7 +11,8 @@ angular.module('myTestApp', [
 	'templates-app',
 	'templates-common',
 	'myTestApp.home',
-	'myTestApp.navbar'
+	'myTestApp.navbar',
+	'myTestApp.account'
 ])
 
 	.config(function myAppConfig($stateProvider, $urlRouterProvider, $httpProvider) {
@@ -65,7 +66,7 @@ angular.module('myTestApp', [
 		$rootScope.$watch('currentUser', function (currentUser) {
 			// if no currentUser and on a page that requires authorization then try to update it
 			// will trigger 401s if user does not have a valid session
-			if (!currentUser && (['/', '/login', '/logout', '/signup'].indexOf($location.path()) === -1 )) {
+			if (!currentUser && (['/', '/login', '/logout', '/register'].indexOf($location.path()) === -1 )) {
 				Auth.currentUser();
 			}
 		});

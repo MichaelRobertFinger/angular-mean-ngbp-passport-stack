@@ -15,5 +15,5 @@ angular.module('myTestApp.home', ['ui.router'])
 	})
 	.controller('HomeController', function HomeController($scope) {
 
-});
+	});
 

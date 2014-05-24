@@ -1,5 +1,6 @@
 module.exports = function ( grunt ) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-contrib-jshint');
 
 	var taskConfig = {
 		pkg: grunt.file.readJSON("package.json"),
@@ -19,15 +20,9 @@ module.exports = function ( grunt ) {
 				'Gruntfile.js'
 			],
 			options: {
-				curly: true,
-				immed: true,
-				newcap: true,
-				noarg: true,
-				sub: true,
-				boss: true,
-				eqnull: true
-			},
-			globals: {}
+				force: true,
+				jshintrc: 'lib/.jshintrc'
+			}
 		},
 
 		/**
@@ -84,4 +79,6 @@ module.exports = function ( grunt ) {
 	 */
 	grunt.renameTask( 'watch', 'delta' );
 	grunt.registerTask( 'watch', [ 'delta' ] );
+
+	grunt.registerTask( 'build', [ 'jshint' ]);
 };

@@ -269,19 +269,18 @@ module.exports = function (grunt) {
 		 * nonetheless inside `src/`.
 		 */
 		jshint: {
-			src: [
-				'<%= app_files.js %>'
-			],
+			src: [ '<%= app_files.js %>' ],
 			test: [
 				'<%= app_files.jsunit %>'
 			],
-			gruntfile: [
-				'Gruntfile.js'
-			],
-			options: {
-				jshintrc: '.jshintrc'
+			gruntfile: {
+				src: [ 'Gruntfile.js' ],
+				options: { jshintrc: '.jshintrc' }
 			},
-			globals: {}
+			options: {
+				force: true,
+				jshintrc: 'src/.jshintrc'
+			}
 		},
 
 		/**

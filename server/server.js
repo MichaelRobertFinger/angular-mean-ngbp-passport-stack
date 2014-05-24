@@ -48,6 +48,8 @@ if ('production' === env) {
 	app.use(favicon(config.server.distFolder + '/favicon.ico'));
 }
 
+app.use(config.server.staticUrl, express.static(config.server.distFolder));
+
 app.use(express.static(path.join(config.root, 'build')));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myTestApp.common', ['ui.router'])
+angular.module('myTestApp.account', ['ui.router'])
 	.config(function config($stateProvider) {
 		$stateProvider.state('login', {
 			url: '/login',

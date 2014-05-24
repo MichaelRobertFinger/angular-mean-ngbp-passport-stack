@@ -14,12 +14,15 @@ exports.create = function (req, res, next) {
 	var newUser = new User(req.body);
 	newUser.provider = 'local';
 
-	newUser.save(function(err) {
+	newUser.save(function (err) {
 		if (err) {
+			console.log('error saving user');
 			return res.json(400, err);
 		}
 
-		req.logIn(newUser, function(err) {
+		console.log('user saved');
+
+		req.logIn(newUser, function (err) {
 			if (err) return next(err);
 			return res.json(newUser.user_info);
 		});
@@ -38,9 +41,9 @@ exports.show = function (req, res, next) {
 			return next(new Error('Failed to load User'));
 		}
 		if (user) {
-			res.send({username: user.username, profile: user.profile });
+			res.send({email: user.email, profile: user.profile });
 		} else {
-			res.send(404, 'USER_NOT_FOUND')
+			res.send(404, 'USER_NOT_FOUND');
 		}
 	});
 };
@@ -50,16 +53,16 @@ exports.show = function (req, res, next) {
  *  returns {exists}
  */
 exports.exists = function (req, res, next) {
-	var username = req.params.username;
-	User.findOne({ username : username }, function (err, user) {
+	var email = req.params.email;
+	User.findOne({ email: email }, function (err, user) {
 		if (err) {
 			return next(new Error('Failed to load User ' + username));
 		}
 
-		if(user) {
+		if (user) {
 			res.json({exists: true});
 		} else {
 			res.json({exists: false});
 		}
 	});
-}
+};
