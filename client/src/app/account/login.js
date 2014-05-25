@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myTestApp.account', ['ui.router'])
+angular.module('myTestApp.account.login', ['ui.router'])
 	.config(function config($stateProvider) {
 		$stateProvider.state('login', {
 			url: '/login',
@@ -13,6 +13,28 @@ angular.module('myTestApp.account', ['ui.router'])
 			data: { pageTitle: 'Login' }
 		});
 	})
-	.controller('LoginController', function LoginController($scope) {
+	.controller('LoginController', [ '$scope', 'Auth', '$location',
+		function LoginController($scope, Auth, $location) {
+			$scope.error = {};
+			$scope.user = {};
 
-	});
+			$scope.login = function (form) {
+				Auth.login({
+						email: $scope.user.email,
+						password: $scope.user.password
+					},
+					function (err) {
+						$scope.errors = {};
+
+						if (!err) {
+							$location.path('/');
+						} else {
+							angular.forEach(err.errors, function (error, field) {
+								form[field].$setValidity('mongoose', false);
+								$scope.errors[field] = error.type;
+							});
+						}
+					}
+				);
+			};
+		}]);

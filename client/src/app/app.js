@@ -6,13 +6,15 @@ angular.module('myTestApp', [
 	'ngSanitize',
 	'http-auth-interceptor',
 	'ui.bootstrap',
-	'ui.router',
 	'http-error-handling',
 	'templates-app',
 	'templates-common',
 	'myTestApp.home',
 	'myTestApp.navbar',
-	'myTestApp.account'
+	'myTestApp.account.register',
+	'myTestApp.account.login',
+	'myTestApp.admin.dashboard',
+	'ui.router'
 ])
 
 	.config(function myAppConfig($stateProvider, $urlRouterProvider, $httpProvider) {
@@ -61,19 +63,20 @@ angular.module('myTestApp', [
 	})
 
 	.run(function ($rootScope, $location, Auth) {
-
 		//watching the value of the currentUser variable.
 		$rootScope.$watch('currentUser', function (currentUser) {
 			// if no currentUser and on a page that requires authorization then try to update it
 			// will trigger 401s if user does not have a valid session
-			if (!currentUser && (['/', '/login', '/logout', '/register'].indexOf($location.path()) === -1 )) {
+			if (!currentUser
+				//&& $location.path()
+				&& (['/home', '/login', '/logout', '/register'].indexOf($location.path()) === -1)) {
+				console.log('location path cur user test (' + $location.path() + ')');
 				Auth.currentUser();
 			}
 		});
 
 		// On catching 401 errors, redirect to the login page.
 		$rootScope.$on('event:auth-loginRequired', function () {
-			console.log('redirect to login');
 			$location.path('/login');
 			return false;
 		});

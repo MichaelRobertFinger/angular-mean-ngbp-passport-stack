@@ -95,7 +95,7 @@ app.use(passport.session());
 
 require('./lib/routes')(app, config);
 
-//app.cache = new NodeCache();
+app.cache = new NodeCache();
 
 // allow express server to be started with a callback (useful in testing)
 app.start = function (config, readyCallback) {
