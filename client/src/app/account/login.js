@@ -19,7 +19,7 @@ angular.module('myTestApp.account.login', ['ui.router'])
 			$scope.user = {};
 
 			$scope.login = function (form) {
-				Auth.login({
+				Auth.login('password', {
 						email: $scope.user.email,
 						password: $scope.user.password
 					},

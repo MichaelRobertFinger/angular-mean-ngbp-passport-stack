@@ -16,7 +16,6 @@ var UserSchema = new Schema({
 		required: true
 	},
 	hashedPassword: String,
-	salt: String,
 	name: String,
 	admin: Boolean,
 	guest: Boolean,
@@ -98,8 +97,8 @@ UserSchema.methods = {
 	 * Authenticate - check if the passwords are the same
 	 */
 
-	authenticate: function(plainText) {
-		return this.encryptPassword(plainText) === this.hashedPassword;
+	authenticate: function(password) {
+		return bcrypt.compareSync(password, this.hashedPassword);
 	},
 
 	/**

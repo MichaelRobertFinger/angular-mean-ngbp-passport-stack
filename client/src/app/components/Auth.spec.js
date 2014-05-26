@@ -26,6 +26,6 @@ describe('Service: Auth', function () {
 
 		$httpBackend.flush();
 
-		expect($rootScope.currentUser).toBe(null);
+		expect($rootScope.currentUser.username).toBeFalsy();
 	});
 });
