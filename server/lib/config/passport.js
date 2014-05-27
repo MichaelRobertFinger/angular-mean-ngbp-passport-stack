@@ -3,6 +3,9 @@
 var mongoose = require('mongoose'),
 	passport = require('passport'),
 	LocalStrategy = require('passport-local').Strategy,
+	FacebookStrategy = require('passport-facebook').Strategy,
+	TwitterStrategy  = require('passport-twitter').Strategy,
+	GoogleStrategy   = require('passport-google-oauth').OAuth2Strategy,
 	User = mongoose.model('User');
 
 // Serialize sessions
@@ -17,12 +20,16 @@ passport.deserializeUser(function(id, done) {
 });
 
 // Use local strategy
-passport.use(new LocalStrategy({
+passport.use('local', new LocalStrategy({
 		usernameField: 'email',
 		passwordField: 'password'
 	},
 	function(email, password, done) {
-		User.findOne({ email: email }, function (err, user) {
+		if(email) {
+			email = email.toLowerCase();
+		}
+
+		User.findOne({ 'email': email }, function (err, user) {
 			if (err) {
 				return done(err);
 			}

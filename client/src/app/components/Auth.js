@@ -12,8 +12,7 @@ angular.module('myTestApp')
 				Session.save({
 					provider: provider,
 					email: user.email,
-					password: user.password,
-					rememberMe: user.rememberMe
+					password: user.password
 				}, function(user) {
 					$rootScope.currentUser = user;
 					return cb();

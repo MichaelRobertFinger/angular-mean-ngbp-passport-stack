@@ -18,7 +18,7 @@ module.exports = function (app, config) {
 
 	// Check if username is available
 	// todo: probably should be a query on users
-	app.get('/auth/check_username/:username', users.exists);
+	app.get('/auth/check_email/:email', users.exists);
 
 	// Session Routes
 	var session = require('./controllers/session');

@@ -17,9 +17,8 @@ angular.module('myTestApp.account.register', ['ui.router'])
 		function RegisterController($scope, Auth, $location) {
 		$scope.register = function(form) {
 			Auth.createUser({
-					email: $scope.user.email,
-					username: $scope.user.username,
-					password: $scope.user.password
+					'email': $scope.user.email,
+					'password': $scope.user.password
 				},
 				function(err) {
 					$scope.errors = {};

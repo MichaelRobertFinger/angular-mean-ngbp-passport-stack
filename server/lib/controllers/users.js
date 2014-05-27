@@ -7,12 +7,13 @@ var mongoose = require('mongoose'),
 
 /**
  * Create user
- * requires: {username, password, email}
+ * requires: {password, email}
  * returns: {email, password}
  */
 exports.create = function (req, res, next) {
-	var newUser = new User(req.body);
-	newUser.provider = 'local';
+	var newUser = new User();
+	newUser.email = newUser.name = req.body.email;
+	newUser.password = req.body.password;
 
 	newUser.save(function (err) {
 		if (err) {
@@ -31,7 +32,7 @@ exports.create = function (req, res, next) {
 
 /**
  *  Show profile
- *  returns {username, profile}
+ *  returns {email, profile}
  */
 exports.show = function (req, res, next) {
 	var userId = req.params.userId;
@@ -49,14 +50,14 @@ exports.show = function (req, res, next) {
 };
 
 /**
- *  Username exists
+ *  Email exists
  *  returns {exists}
  */
 exports.exists = function (req, res, next) {
 	var email = req.params.email;
-	User.findOne({ email: email }, function (err, user) {
+	User.findOne({ 'email': email }, function (err, user) {
 		if (err) {
-			return next(new Error('Failed to load User ' + username));
+			return next(new Error('Failed to load User ' + email));
 		}
 
 		if (user) {

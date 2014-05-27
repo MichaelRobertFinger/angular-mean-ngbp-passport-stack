@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myTestApp')
-	.directive('uniqueUsername', function ($http) {
+	.directive('uniqueEmail', function ($http) {
 		return {
 			restrict: 'A',
 			require: 'ngModel',
@@ -11,7 +11,7 @@ angular.module('myTestApp')
 						ngModel.$setValidity('unique', true);
 						return;
 					}
-					$http.get('/auth/check_username/' + value).success(function(user) {
+					$http.get('/auth/check_email/' + value).success(function(user) {
 						if(!user.exists) {
 							ngModel.$setValidity('unique', true);
 						} else {
