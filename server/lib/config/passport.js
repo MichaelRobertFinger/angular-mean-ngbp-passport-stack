@@ -110,12 +110,11 @@ passport.use(new GoogleStrategy({
 			} else {
 				// user already exists and is logged in, we have to link accounts
 				var user = req.user; // pull the user out of the session
-
 				user.google.id = profile.id;
 				user.google.token = token;
 				user.google.name = profile.displayName;
 				// pull the first email
-				user.google.email = newUser.name = (profile.emails[0].value || '').toLowerCase();
+				user.google.email = (profile.emails[0].value || '').toLowerCase();
 
 				user.save(function (err) {
 					if (err)

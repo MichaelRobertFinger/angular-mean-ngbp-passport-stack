@@ -43,11 +43,9 @@ describe('User: save', function () {
 	});
 
 	afterEach(function () {
-		/*
 		 user.remove({}, function () {
 		 console.log('removed user from db');
 		 });
-		 */
 	});
 });
 
