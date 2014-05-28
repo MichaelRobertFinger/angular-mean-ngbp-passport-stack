@@ -51,11 +51,6 @@ UserSchema
 /**
  * Validations
  */
-
-var validatePresenceOf = function (value) {
-	return value && value.length;
-};
-
 UserSchema.path('email').validate(function (email) {
 	var emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
 	return emailRegex.test(email);
@@ -69,21 +64,13 @@ UserSchema.path('email').validate(function (value, respond) {
 	});
 }, 'The specified email address is already in use.');
 
-/**
- * Pre-save hook
- */
-
+// pre-save hook
 UserSchema.pre('save', function (next) {
 	if (!this.isNew) {
 		return next();
 	}
 
-	if (!validatePresenceOf(this.password)) {
-		next(new Error('Invalid password'));
-	}
-	else {
-		next();
-	}
+	next();
 });
 
 /**

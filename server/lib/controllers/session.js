@@ -42,3 +42,14 @@ exports.login = function (req, res, next) {
 		});
 	})(req, res, next);
 };
+
+/*
+exports.google = function (req, res, next) {
+	passport.authenticate('google', { scope: ['profile', 'email'] }, function (err, user, info) {
+		console.log("err ==" + angular.toJson(err));
+		console.log("user ==" + angular.toJson(user));
+		console.log("info ==" + angular.toJson(info));
+	});
+};
+*/
+

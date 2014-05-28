@@ -84,7 +84,9 @@ app.use(session({
 // Bootstrap models
 var modelsPath = path.join(__dirname, 'lib/models');
 fs.readdirSync(modelsPath).forEach(function (file) {
-	require(modelsPath + '/' + file);
+	if(file.indexOf('spec') === -1) {
+		require(modelsPath + '/' + file);
+	}
 });
 
 var pass = require('./lib/config/passport'); // pass passport for configuration

@@ -13,6 +13,7 @@ angular.module('myTestApp', [
 	'myTestApp.navbar',
 	'myTestApp.account.register',
 	'myTestApp.account.login',
+	'myTestApp.account.profile',
 	'myTestApp.admin.dashboard',
 	'ui.router'
 ])

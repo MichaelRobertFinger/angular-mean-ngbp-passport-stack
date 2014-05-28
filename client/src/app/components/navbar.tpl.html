@@ -19,6 +19,7 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle">Welcome, {{ currentUser.email }} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
+                        <li><a ui-sref="profile"><span class="glyphicon-cog"></span> Profile</a></li>
                         <li><a ng-click="logout()"><span class="glyphicon-log-out"></span> Logout</a></li>
                     </ul>
                 </li>
@@ -31,7 +32,7 @@
                     Home
                 </a>
             </li>
-            <li ui-sref-active="active">
+            <li ui-sref-active="active" ng-show="currentUser">
                 <a href ui-sref="admin">
                     <i class="fa"></i>
                     Dashboard
