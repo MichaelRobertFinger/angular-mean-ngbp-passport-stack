@@ -7,45 +7,26 @@ var User = mongoose.model('User'),
 mongoose.connect(config.db);
 
 describe('User: save', function () {
-	var user = new User();
 	var expected = { email: 'foo@foo.com', password: 'barbar' };
 
 	beforeEach(function () {
 	});
 
 	it('should save a local user', function () {
-		var actual = null;
-
+		var user = new User();
 		user.email = expected.email;
 		user.password = expected.password;
 
-		runs(function () {
-			user.save(function (err) {
-				console.log('err: ' + err);
-			});
+		user.save(function (err) {
+			if (err) throw err;
+			done();
 		});
 
-		waits(300);
-
-		runs(function () {
-			User.find({ email: expected.email}, function (err, user) {
-				actual = user;
-			});
-		});
-
-		waits(300);
-
-		runs(function () {
-			console.log('actual: ' + actual);
-			console.log('expected email == ' + expected.email);
+		User.findOneAndRemove({ email: expected.email}, function (err, user) {
+			var actual = user;
 			expect(actual.email).toBe(expected.email);
+			done();
 		});
-	});
-
-	afterEach(function () {
-		 user.remove({}, function () {
-		 console.log('removed user from db');
-		 });
 	});
 });
 

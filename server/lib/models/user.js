@@ -56,26 +56,18 @@ UserSchema.path('email').validate(function (email) {
 	return emailRegex.test(email);
 }, 'The specified email is invalid.');
 
-// TODO - this logic needs to be moved to user controller (or wherever local is saved)
-/*
-UserSchema.path('email').validate(function (value, respond) {
-	mongoose.models["User"].findOne({'email': value}, function (err, user) {
-		if (err) throw err;
-		if (user) {
-			return respond(false);
-		}
-		respond(true);
-	});
-}, 'The specified email address is already in use.');
-*/
-
 // pre-save hook
 UserSchema.pre('save', function (next) {
-	if (!this.isNew) {
-		return next();
-	}
-
-	next();
+	//this.isNew
+	// check for existing user, that is not this user, with the same email.
+	mongoose.models["User"].findOne({'email': this.email}, function (err, user) {
+		if (err) throw err;
+		if (user && user._id !== this._id) {
+			return next(new Error('The specified email address is already in use.'));
+		} else {
+			return next();
+		}
+	});
 });
 
 /**

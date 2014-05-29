@@ -11,24 +11,21 @@ module.exports = {
 		staticUrl: '/static', // The base url from which we serve static files (such as js, css and images)
 		cookieSecret: 'mytest-app' // The secret for encrypting the cookie
 	},
-	//db: 'mongodb://testy:testy@ds049848.mongolab.com:49848/mytest'
-	//db: 'mongodb://testy:testy@127.0.0.1:27017/mytest',
-	//single sign-on credentials
-	'facebookAuth' : {
-		'clientID' 		: 'your-secret-clientID-here', // your App ID
-		'clientSecret' 	: 'your-client-secret-here', // your App Secret
-		'callbackURL' 	: 'http://localhost:9000/auth/facebook/callback'
+	'facebookAuth': {
+		'clientID': 'your-secret-clientID-here', // your App ID
+		'clientSecret': 'your-client-secret-here', // your App Secret
+		'callbackURL': 'http://localhost:9000/auth/facebook/callback'
 	},
 
-	'twitterAuth' : {
-		'consumerKey' 		: 'your-consumer-key-here',
-		'consumerSecret' 	: 'your-client-secret-here',
-		'callbackURL' 		: 'http://localhost:9000/auth/twitter/callback'
+	'twitterAuth': {
+		'consumerKey': 'your-consumer-key-here',
+		'consumerSecret': 'your-client-secret-here',
+		'callbackURL': 'http://localhost:9000/auth/twitter/callback'
 	},
 
-	'googleAuth' : {
-		'clientID' 		: '665254621941-jpdrphk5p0tbnapt8nsrvo0sgi9llpeg.apps.googleusercontent.com',
-		'clientSecret' 	: 'xtiWDkT_YvQzXi096-AmeQTr',
-		'callbackURL' 	: 'http://localhost:9000/auth/google/callback'
+	'googleAuth': {
+		'clientID': '665254621941-jpdrphk5p0tbnapt8nsrvo0sgi9llpeg.apps.googleusercontent.com',
+		'clientSecret': 'xtiWDkT_YvQzXi096-AmeQTr',
+		'callbackURL': 'http://localhost:9000/auth/google/callback'
 	}
 };
