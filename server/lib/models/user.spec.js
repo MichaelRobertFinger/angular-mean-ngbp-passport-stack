@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 require('./user');
 var User = mongoose.model('User'),
 	config = require('../config/env/test');
-var assert = require('assert');
+var assert = require('chai').assert;
 
 describe('User: save', function () {
 	beforeEach(function (done) {

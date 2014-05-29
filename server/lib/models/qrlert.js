@@ -11,7 +11,7 @@ var QrlertSchema = new Schema({
 	},
 	url: String,
 	created: Date,
-	updated: [Date],
+	updated: Date,
 	creator: {
 		type: Schema.ObjectId,
 		ref: 'User'
@@ -19,11 +19,21 @@ var QrlertSchema = new Schema({
 });
 
 // Validations
-/*
-UserSchema.path('email').validate(function (email) {
-	var emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-	return emailRegex.test(email);
-}, 'The specified email is invalid.');
-*/
+QrlertSchema.path('url').validate(function (url) {
+	var urlRegex = /^(http[s]?:\/\/)?(www\.)?([^\@]\w*)\.\w{2,4}$/;
+	return urlRegex.test(url);
+}, 'The specified url is invalid.');
+
+//pre-save hook
+QrlertSchema.pre('save', function(next) {
+	if(this.isNew)
+	{
+		this.created = Date.now();
+	} else {
+		this.updated = Date.now();
+	}
+
+	next();
+});
 
 mongoose.model('Qrlert', QrlertSchema);

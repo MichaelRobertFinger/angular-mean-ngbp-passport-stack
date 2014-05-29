@@ -41,7 +41,8 @@
 		"grunt-conventional-changelog": "^0.1.2",
 		"grunt-bump": "0.0.6",
 		"frisby": "~0.8.1",
-		"grunt-mocha-test": "~0.10.2"
+		"grunt-mocha-test": "~0.10.2",
+		"chai": "*"
 	},
 	"engines": {
 		"node": ">=0.10.0"

@@ -58,7 +58,6 @@ UserSchema.path('email').validate(function (email) {
 
 // pre-save hook
 UserSchema.pre('save', function (next) {
-	//this.isNew
 	// check for existing user, that is not this user, with the same email.
 	mongoose.models["User"].findOne({'email': this.email}, function (err, user) {
 		if (err) throw err;
