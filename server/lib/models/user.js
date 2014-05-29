@@ -81,7 +81,7 @@ UserSchema.methods = {
 	 */
 
 	authenticate: function (password) {
-		return bcrypt.compareSync(password, this.password);
+		return bcrypt.compareSync(password, this.hashedPassword);
 	},
 
 	/**

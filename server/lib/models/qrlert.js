@@ -17,3 +17,13 @@ var QrlertSchema = new Schema({
 		ref: 'User'
 	}
 });
+
+// Validations
+/*
+UserSchema.path('email').validate(function (email) {
+	var emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+	return emailRegex.test(email);
+}, 'The specified email is invalid.');
+*/
+
+mongoose.model('Qrlert', QrlertSchema);

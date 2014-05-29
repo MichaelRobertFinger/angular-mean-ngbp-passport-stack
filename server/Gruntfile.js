@@ -48,7 +48,8 @@ module.exports = function (grunt) {
 
 			mochaTest: {
 				options: {
-					reporter: 'spec'
+					reporter: 'spec',
+					clearRequireCache: true
 				},
 				src: [ 'lib/**/*.spec.js' ]
 			},
@@ -63,7 +64,7 @@ module.exports = function (grunt) {
 			 *
 			 * But we don't need the same thing to happen for all the files.
 			 */
-			delta: {
+			watch: {
 				/**
 				 * By default, we want the Live Reload to work for all tasks; this is
 				 * overridden in some tasks (like this file) where browser resources are
@@ -90,8 +91,8 @@ module.exports = function (grunt) {
 				 * run our unit tests.
 				 */
 				jssrc: {
-					files: [ 'lib/**/*.js', '!lib/**/*.spec.js' ],
-					tasks: [ 'jshint:src' ]
+					files: [ 'lib/**/*.js' ],
+					tasks: [ 'jshint:src', 'mochaTest' ]
 				}
 			}
 		}
@@ -99,15 +100,15 @@ module.exports = function (grunt) {
 
 	grunt.initConfig(grunt.util._.extend(taskConfig));
 
-	/**
-	 * In order to make it safe to just compile or copy *only* what was changed,
-	 * we need to ensure we are starting from a clean, fresh build. So we rename
-	 * the `watch` task to `delta` (that's why the configuration var above is
-	 * `delta`) and then add a new task called `watch` that does a clean build
-	 * before watching for changes.
-	 */
-	grunt.renameTask('watch', 'delta');
-	grunt.registerTask('watch', [ 'delta' ]);
+	// On watch events, if the changed file is a test file then configure mochaTest to only
+	// run the tests from that file. Otherwise run all the tests
+	var defaultTestSrc = grunt.config('mochaTest.src');
+	grunt.event.on('watch', function(action, filepath) {
+		grunt.config('mochaTest.src', defaultTestSrc);
+		//if (filepath.match('lib/')) {
+			grunt.config('mochaTest.src', filepath);
+		//}
+	});
 
 	grunt.registerTask('test', ['mochaTest']);
 
