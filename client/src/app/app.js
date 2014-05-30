@@ -68,8 +68,6 @@ angular.module('myTestApp', [
 		$rootScope.$watch('currentUser', function (currentUser) {
 			// if no currentUser and on a page that requires authorization then try to update it
 			// will trigger 401s if user does not have a valid session
-			console.log('location path cur user test (' + $location.path() + ')' + 'length: ' + $location.path().length);
-
 			if (!currentUser &&
 				$location.path().length !== 0 &&
 				(['/home', '/login', '/logout', '/register'].indexOf($location.path()) === -1)) {

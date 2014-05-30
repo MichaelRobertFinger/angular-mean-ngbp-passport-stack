@@ -13,10 +13,6 @@ angular.module('myTestApp.account.profile', ['ui.router'])
 			data: { pageTitle: 'User Profile' }
 		});
 	})
-	.controller('ProfileController', [ '$rootScope', '$scope', 'Auth', '$location',
-		function ProfileController($rootScope, $scope, Auth, $location) {
-			Auth.currentUser();
-			if ($rootScope.currentUser) {
-				$scope.user = currentUser;
-			}
+	.controller('ProfileController', [ '$scope', 'Auth', '$location',
+		function ProfileController($scope, Auth, $location) {
 		}]);

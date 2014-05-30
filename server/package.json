@@ -42,7 +42,8 @@
 		"grunt-bump": "0.0.6",
 		"frisby": "~0.8.1",
 		"grunt-mocha-test": "~0.10.2",
-		"chai": "*"
+		"chai": "*",
+		"sinon": "~1.10.1"
 	},
 	"engines": {
 		"node": ">=0.10.0"

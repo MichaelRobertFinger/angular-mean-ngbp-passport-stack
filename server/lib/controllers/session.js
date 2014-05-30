@@ -45,11 +45,18 @@ exports.login = function (req, res, next) {
 
 /*
 exports.google = function (req, res, next) {
-	passport.authenticate('google', { scope: ['profile', 'email'] }, function (err, user, info) {
-		console.log("err ==" + angular.toJson(err));
-		console.log("user ==" + angular.toJson(user));
-		console.log("info ==" + angular.toJson(info));
-	});
+	console.log(req._passport.instance);
+	passport = req._passport.instance;
+
+	passport.authenticate('google', { scope: ['profile', 'email'] });
 };
 */
 
+exports.googleCallback = function (req, res, next) {
+	passport = req._passport.instance;
+
+	passport.authenticate('google', {
+		successRedirect: '/profile',
+		failureRedirect: '/'
+	});
+};

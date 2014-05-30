@@ -55,16 +55,14 @@ passport.use('local', new LocalStrategy({
 
 // Google
 passport.use(new GoogleStrategy({
-
 		clientID: config.googleAuth.clientID,
 		clientSecret: config.googleAuth.clientSecret,
 		callbackURL: config.googleAuth.callbackURL,
 		passReqToCallback: true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
-
 	},
 	function (req, token, refreshToken, profile, done) {
 
-		console.log(req.user);
+		//console.log(req.user);
 		// asynchronous
 		process.nextTick(function () {
 

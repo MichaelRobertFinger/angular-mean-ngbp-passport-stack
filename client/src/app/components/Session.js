@@ -1,6 +1,6 @@
 'use strict';
 
 angular.module('myTestApp')
-	.factory('Session', function ($resource) {
+	.factory('Session',['$resource', function ($resource) {
 		return $resource('/auth/session/');
-	});
+	}]);
