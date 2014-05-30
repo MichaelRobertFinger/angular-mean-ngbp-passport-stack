@@ -64,6 +64,7 @@ passport.use(new GoogleStrategy({
 	},
 	function (req, token, refreshToken, profile, done) {
 
+		console.log(req.user);
 		// asynchronous
 		process.nextTick(function () {
 
