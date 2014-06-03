@@ -96,7 +96,7 @@ passport.use(new GoogleStrategy({
 						newUser.google.token = token;
 						newUser.google.name = profile.displayName;
 						// pull the first email
-						newUser.google.email = newUser.name = (profile.emails[0].value || '').toLowerCase();
+						newUser.google.email = newUser.name = newUser.email = (profile.emails[0].value || '').toLowerCase();
 
 						newUser.save(function (err) {
 							if (err)

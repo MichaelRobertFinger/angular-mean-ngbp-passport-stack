@@ -5,13 +5,6 @@ var path = require('path'),
 	passport = require('passport');
 
 module.exports = function (app, config) {
-	// redirect to a qrlert (eventually api call) with if/else logic in res to determine a hard redirect
-	app.route('/q/:id').get(function (req, res, next) {
-		var args = { qrlertId: req.params.id };
-		console.log(config.apiUrl);
-		res.redirect('http://google.com');
-	});
-
 	// User Routes
 	var users = require('./controllers/users');
 	app.post('/auth/users', users.create);
